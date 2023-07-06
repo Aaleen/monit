@@ -64,9 +64,10 @@ class _FormScreenState extends State<FormScreen> {
         'guardian_name': _guardianNameController.text,
         'class': _classController.text,
         'image': imagePath,
-        'defaulter': 1
+        'defaulter': 1,
+        'sync': 0,
       };
-
+      print('Student Data: $student');
       List<Map<String, dynamic>> existingStudents =
           await _databaseHelper.getStudents();
       bool isDuplicate = existingStudents.any((existingStudent) =>
@@ -194,6 +195,13 @@ class _FormScreenState extends State<FormScreen> {
                   },
                   decoration: InputDecoration(labelText: 'Class'),
                 ),
+                // TextFormField(
+                //   controller: TextEditingController(text: sync.toString()),
+                //   enabled: false,
+                //   decoration: InputDecoration(
+                //     labelText: 'Synced',
+                //   ),
+                // ),
                 SizedBox(height: 16.0),
                 SizedBox(height: 8.0),
                 SizedBox(height: 16.0),
@@ -396,6 +404,23 @@ class _RetrieveScreenState extends State<RetrieveScreen> {
                                                       fontSize: 16),
                                                 ),
                                                 Text('${student['class']}'),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 130.0),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  'Synced: ',
+                                                  textAlign: TextAlign.left,
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 16),
+                                                ),
+                                                Text('${student['sync']}'),
                                               ],
                                             ),
                                           ),
